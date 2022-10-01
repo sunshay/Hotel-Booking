@@ -29,7 +29,7 @@ def home(request, template_name="hotel/index.html"):
     r4.price= 150
     
     # list for all object
-    list_room = [r1, r2, r3]
+    list_room = [r1, r2, r3, r4]
     
 
     
