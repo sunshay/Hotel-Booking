@@ -123,6 +123,7 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = STATIC_ROOT = BASE_DIR / "staticfiles" 
 MEDIA_ROOT = MEDIA_ROOT = BASE_DIR/ 'media'
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
+# Use for to make site online
 #STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
