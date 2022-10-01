@@ -10,6 +10,7 @@ def home(request, template_name="hotel/index.html"):
     r1 = Room()
     r2 = Room()
     r3 = Room()
+    r4 = Room()
     
     # first object
     r1.name= "Premium King Room 1"
@@ -22,6 +23,10 @@ def home(request, template_name="hotel/index.html"):
     # third object
     r3.name= "Premium King Room 3"
     r3.price= 140
+    
+    # fourth object
+    r4.name= "Premium King Room 4"
+    r4.price= 150
     
     # list for all object
     list_room = [r1, r2, r3]
