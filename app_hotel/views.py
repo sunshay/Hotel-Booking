@@ -1,5 +1,3 @@
-from email import message
-from multiprocessing import context
 from django.shortcuts import render
 from .models import Room
 
