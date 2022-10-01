@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Add app hotel
+    # Add app hotel Booking
     'app_hotel.apps.AppHotelConfig',
 ]
 
