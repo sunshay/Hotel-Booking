@@ -2,7 +2,17 @@
 
 {% block content %}
 
-<h1>Hello Hotel booking</h1>
+<h1>{{messages}}</h1>
+
+<h3>List room</h3>
+
+{% for list_room in room_lists  %}
+
+<p>{{list_room.name}}</p>
+<p>{{list_room.price}}</p>
+<br>
+
+{% endfor %}
 
 {% endblock content %}
 
