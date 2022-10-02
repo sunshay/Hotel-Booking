@@ -33,9 +33,9 @@ class Room_Blog_Absact(models.Model):
               )
     
     title = models.CharField(max_length=100)
-    image = models.ImageField()
+    image = models.ImageField(upload_to='images/')
     slug = models.SlugField(blank=True, max_length=100, unique=True)
-    description = models.TextField( upload_to='images')
+    description = models.TextField( )
     published = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add =True)
     updated = models.DateTimeField(auto_now =True)
