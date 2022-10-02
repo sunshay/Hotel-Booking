@@ -1,39 +1,19 @@
 from django.shortcuts import render
+from django.views.generic.base import TemplateView
 from .models import Room
 
 # Create your views here.
 
-def home(request, template_name="hotel/index.html"):
-    context= {}
-    messages = "Hello Hotel Booking"
-    # object instance
-    r1 = Room()
-    r2 = Room()
-    r3 = Room()
-    r4 = Room()
-    
-    # first object
-    r1.name= "Premium King Room 1"
-    r1.price= 100
-    
-    # second object
-    r2.name= "Premium King Room 2"
-    r2.price= 130
-    
-    # third object
-    r3.name= "Premium King Room 3"
-    r3.price= 140
-    
-    # fourth object
-    r4.name= "Premium King Room 4"
-    r4.price= 150
-    
-    # list for all object
-    list_room = [r1, r2, r3, r4]
-    
 
-    
-    
-    context['messages'] = messages
-    context['room_lists'] = list_room
-    return render(request, template_name, context)
+
+from .models import Room
+
+class HomePageView(TemplateView):
+
+    template_name = "hotel/index.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['latest_rooms'] = Room.objects.all()[:5]
+        return context
+

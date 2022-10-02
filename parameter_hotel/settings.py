@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Add app hotel Booking
     'app_hotel.apps.AppHotelConfig',
+    # add django tag
+    'taggit',
 ]
 
 MIDDLEWARE = [
@@ -122,7 +124,7 @@ MEDIA_URL = '/media/'
 STATICFILES_DIRS = [BASE_DIR / "static"]  
 STATIC_ROOT = STATIC_ROOT = BASE_DIR / "staticfiles" 
 MEDIA_ROOT = MEDIA_ROOT = BASE_DIR/ 'media'
-STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
+#STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 # Use for to make site online
 #STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
