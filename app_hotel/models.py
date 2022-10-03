@@ -68,6 +68,7 @@ class Comment(models.Model):
 # Model chird Room for Room_Blog_Absact 
 class Room(Room_Blog_Absact):
     price = models.IntegerField()
+    size = models.IntegerField()
     capacity = models.IntegerField()
     bed = models.CharField(max_length=100,blank=True,null=True)
     
