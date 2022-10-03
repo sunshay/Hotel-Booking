@@ -172,21 +172,27 @@
         <div class="container-fluid">
             <div class="hp-room-items">
                 <div class="row">
-                    {% for room  in latest_rooms %}
+                    {% for room in latest_rooms %}
                     <div class="col-lg-3 col-md-6">
                         <div class="hp-room-item set-bg" data-setbg="{{room.image.url}}">
                             <div class="hr-text">
-                                <h3>{{room.title}}</h3>
+                                <h3>{{ room.title }}</h3>
                                 <h2>{{room.price}}$<span>/Pernight</span></h2>
                                 <table>
                                     <tbody>
                                         <tr>
                                             <td class="r-o">Size:</td>
+
                                             <td>{{room.size}} ft</td>
                                         </tr>
                                         <tr>
                                             <td class="r-o">Capacity:</td>
                                             <td>Max persion {{room.capacity}}</td>
+                                            <td> {{room.size}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="r-o">Capacity:</td>
+                                            <td>Max persion {{room.capacity}} </td>
                                         </tr>
                                         <tr>
                                             <td class="r-o">Bed:</td>
@@ -194,7 +200,11 @@
                                         </tr>
                                         <tr>
                                             <td class="r-o">Services:</td>
+
                                             <td>{{room.services.value}},...</td>
+
+                                            <td>{{room.services}}...</td>
+
                                         </tr>
                                     </tbody>
                                 </table>
