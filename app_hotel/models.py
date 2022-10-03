@@ -52,8 +52,8 @@ class Room_Blog_Absact(models.Model):
         
 # Model Comments for Room and Blog
 class Comment(models.Model):
-    # name = models.CharField(max_length=50)
-    # email = models.EmailField(max_length=100)
+    name = models.CharField(max_length=50)
+    email = models.EmailField(max_length=100)
     content = models.TextField()
     room_blog = models.ForeignKey(Room_Blog_Absact, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
