@@ -5,9 +5,6 @@ from .models import Room
 # Create your views here.
 
 
-
-from .models import Room
-
 class HomePageView(TemplateView):
 
     template_name = "hotel/index.html"

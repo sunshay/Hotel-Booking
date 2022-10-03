@@ -51,7 +51,6 @@ class Room_Blog_Absact(models.Model):
         ordering = ['published']
         
 # Model Comments for Room and Blog
-       
 class Comment(models.Model):
     # name = models.CharField(max_length=50)
     # email = models.EmailField(max_length=100)
@@ -67,7 +66,6 @@ class Comment(models.Model):
         return 'Comment by {}'.format(self.name)
     
 # Model chird Room for Room_Blog_Absact 
-   
 class Room(Room_Blog_Absact):
     price = models.IntegerField()
     capacity = models.IntegerField()
@@ -75,7 +73,6 @@ class Room(Room_Blog_Absact):
     
 
 # Model Booking
-  
 class Booking(models.Model):
     choice_guest = (
                     ('one_dult',  '1 Dult'),
@@ -94,7 +91,6 @@ class Booking(models.Model):
     user = models.ForeignKey(Person, on_delete=models.CASCADE)
     
 # Model Category    
-
 class Category(models.Model):
     
     name = models.CharField(max_length=100,blank=True,null=True)
