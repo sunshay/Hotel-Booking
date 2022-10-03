@@ -49,6 +49,7 @@ class Room_Blog_Absact(models.Model):
     class Meta:
         #abstract = True
         ordering = ['title','published','status','image']
+    
         
 # Model Comments for Room and Blog
 class Comment(models.Model):

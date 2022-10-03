@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Person, Room,Comment,Booking, Category, Blog
+from django.utils.html import format_html
 
 # change Django administration text Login, The listview page and The HTML title tag 
 admin.site.site_header = "Hotel Booking"
@@ -15,7 +16,11 @@ class PersonAdmin(admin.ModelAdmin):
 # Model Admin room and booking
 @admin.register(Room)
 class RoomAdmin(admin.ModelAdmin):
-    list_display = ('title','price','size','capacity','bed','published','status','image')
+    def image_tag(self, obj):
+        return format_html('<img src="{}" width="100" height="50" />'.format(obj.image.url))
+
+    image_tag.short_description = 'Image'
+    list_display = ('title','price','size','capacity','bed','published','status','image_tag')
 
 
 @admin.register(Comment)
