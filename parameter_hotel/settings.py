@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -121,12 +122,12 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 MEDIA_URL = '/media/'
-STATICFILES_DIRS = [BASE_DIR / "static"]  
-STATIC_ROOT = STATIC_ROOT = BASE_DIR / "staticfiles" 
-MEDIA_ROOT = MEDIA_ROOT = BASE_DIR/ 'media'
+#STATICFILES_DIRS = os.path.join(BASE_DIR, 'static')
+
+STATIC_ROOT = os.path.join(BASE_DIR / "staticfiles")
+MEDIA_ROOT = os.path.join(BASE_DIR/ 'media')
+
 #STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
-# Use for to make site online
-#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 

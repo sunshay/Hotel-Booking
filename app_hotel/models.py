@@ -22,7 +22,7 @@ class Person(models.Model):
         return '%s %s' % (self.first_name, self.last_name)
     
     class Meta:
-        ordering = ['first_name', 'last_name']
+        ordering = ["last_name", "first_name","birth_date","phone","email","type_user"]
 
 # Model Abstract Room and Blog
 class Room_Blog_Absact(models.Model):
@@ -48,7 +48,7 @@ class Room_Blog_Absact(models.Model):
     
     class Meta:
         #abstract = True
-        ordering = ['published']
+        ordering = ['title','published','status','image']
         
 # Model Comments for Room and Blog
 class Comment(models.Model):
@@ -60,7 +60,7 @@ class Comment(models.Model):
     
 
     class Meta:
-        ordering = ('-created',)
+        ordering = ('-created','name','email')
 
     def __str__(self):
         return 'Comment by {}'.format(self.name)
@@ -71,6 +71,10 @@ class Room(Room_Blog_Absact):
     size = models.IntegerField()
     capacity = models.IntegerField()
     bed = models.CharField(max_length=100,blank=True,null=True)
+    
+    class Meta:
+        model: Room_Blog_Absact
+        ordering = ('title','price','size','capacity','bed','published','status','image')
     
 
 # Model Booking

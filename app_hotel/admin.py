@@ -1,18 +1,24 @@
 from django.contrib import admin
-from .models import Person, Room,Booking, Category, Blog
+from .models import Person, Room,Comment,Booking, Category, Blog
 
 
 
+    
 # Model admin person.
+@admin.register(Person)
 class PersonAdmin(admin.ModelAdmin):
-    pass
-admin.site.register(Person, PersonAdmin)
+    list_display = ("last_name", "first_name","birth_date","phone","email","type_user")
+
 
 # Model Admin room and booking
+@admin.register(Room)
 class RoomAdmin(admin.ModelAdmin):
-    pass
-admin.site.register(Room, RoomAdmin)
-admin.site.register(Booking, RoomAdmin)
+    list_display = ('title','price','size','capacity','bed','published','status','image')
+
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('created','name','email')
 
 # Model admin blog by category
 class BlogAdmin(admin.ModelAdmin):
