@@ -47,7 +47,7 @@ class Room_Blog_Absact(models.Model):
         return self.title
     
     class Meta:
-        #abstract = True
+        #abstract = True i can't define this abstract class
         ordering = ['title','published','status','image']
     
         
