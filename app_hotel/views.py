@@ -36,7 +36,7 @@ class RoomView(DetailView):
         context['comments'] = comments
         context['form'] = form
         return context
-
+    # create a post for show one and to make a comment
     def post(self, request, *args, **kwargs):
         form = CommentForm(request.POST)
         self.object = self.get_object()
