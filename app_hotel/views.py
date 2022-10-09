@@ -64,9 +64,11 @@ class RoomView(DetailView):
             content = form.cleaned_data['content']
 
             comment = Comment.objects.create(
-                name=name, email=email, content=content, post=post_room
+                name=name, email=email, content=content, room_blog=post_room
             )
-
+            comment.save()
+            
+           
             form = CommentForm()
             context['form'] = form
             return self.render_to_response(context=context)

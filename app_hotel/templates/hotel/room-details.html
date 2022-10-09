@@ -83,13 +83,7 @@
                         </div>
                         <div class="ri-text">
                             <span>{{ comment.created }}</span>
-                            <div class="rating">
-                                <i class="icon_star"></i>
-                                <i class="icon_star"></i>
-                                <i class="icon_star"></i>
-                                <i class="icon_star"></i>
-                                <i class="icon_star-half_alt"></i>
-                            </div>
+                            
                             <h5>{{ comment.name }}</h5>
                             <p>{{ comment.content }}</p>
                         </div>
@@ -100,13 +94,15 @@
 
                 <div class="review-add">
                     <h4>Add Review</h4>
-                    <form action="#" class="ra-form">
+                    <form  class="ra-form" method="POST">
+                        {% csrf_token %}
                         <div class="row">
                             <div class="col-lg-6">
-                                <input type="text" placeholder="Name*">
+                                <input type="text" placeholder="Name*" class="form-control {% if form.name.errors %}is-invalid{% endif %}" id="id_name"
+                                name="name" value="{{ form.name.value|default:'' }}">
                             </div>
                             <div class="col-lg-6">
-                                <input type="text" placeholder="Email*">
+                                <input type="text" placeholder="Email*" class="form-control {% if form.email.errors %}is-invalid{% endif %}" id="id_email" name="email" value="{{ form.email.value|default:'' }}">
                             </div>
                             <div class="col-lg-12">
                                 <div>
@@ -119,7 +115,7 @@
                                         <i class="icon_star-half_alt"></i>
                                     </div>
                                 </div>
-                                <textarea placeholder="Your Review"></textarea>
+                                <textarea placeholder="Your Review" class="form-control {% if form.content.errors %}is-invalid{% endif %}" id="id_content" name="content" rows="4"{{ form.content.value|default:'' }}></textarea>
                                 <button type="submit">Submit Now</button>
                             </div>
                         </div>
