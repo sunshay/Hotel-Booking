@@ -68,16 +68,19 @@
                 </div>
 
                 <div class="rd-reviews">
-                    <h4>Reviews</h4>
                     {% if comments %}
-                    <div class="row mt-5">
-                      <div class="col-lg-6 offset-lg-3">
-                        Comment{{ comments.count|pluralize }}
-                        <span class="badge badge-dark ml-2">{{ comments.count }}</span>
-                      </div>
-
+                    <h4>Reviews</h4>
+                    
+                   
+                       <h5> Comment{{ comments.count|pluralize }}
+                        <span class="badge badge-dark ml-2">{{ comments.count }}</span></h5>
+                        <hr>
+                        <br>
+                      
+                    {% endif %}
+                    {% for comment in comments %}
                     <div class="review-item">
-                        {% for comment in comments %}
+                        
                         <div class="ri-pic">
                             <img src="{% static 'img/avatar.svg' %}" alt="">
                         </div>
@@ -87,10 +90,8 @@
                             <h5>{{ comment.name }}</h5>
                             <p>{{ comment.content }}</p>
                         </div>
-                        {% endfor %}
-                       
-                        {% endif %}
                     </div>
+                    {% endfor %}
 
                 <div class="review-add">
                     <h4>Add Review</h4>
@@ -122,6 +123,8 @@
                     </form>
                 </div>
             </div>
+        </div>
+
             <div class="col-lg-4">
                 <div class="room-booking">
                     <h3>Your Reservation</h3>
