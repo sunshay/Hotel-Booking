@@ -30,15 +30,15 @@ class BlogView(TemplateView):
 
 class RoomView(DetailView):
     model = Room
-    template_name = "hotel/room_detail.html"
+    template_name = "hotel/room-details.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         pk = self.kwargs["pk"]
-        slug = self.kwargs["slug"]
+        #slug = self.kwargs["slug"]
 
         form = CommentForm()
-        post_room = get_object_or_404(Room, pk=pk, slug=slug)
+        post_room = get_object_or_404(Room, pk=pk)
         comments = post_room.comment_set.all()
 
         context['post_room'] = post_room
