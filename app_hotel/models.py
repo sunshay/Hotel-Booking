@@ -107,3 +107,13 @@ class Category(models.Model):
 # Model Chird Blog for Room_Blog_Absact      
 class Blog(Room_Blog_Absact):
     room_blog = models.ForeignKey(Category, on_delete=models.CASCADE)
+
+# Model contact 
+
+class Contact(models.Model):
+    email = models.EmailField()
+    subject = models.CharField(max_length=255)
+    message = models.TextField()
+
+    def __str__(self):
+        return self.email
