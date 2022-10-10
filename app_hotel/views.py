@@ -76,7 +76,7 @@ class RoomView(DetailView):
         return self.render_to_response(context=context)
     
 
-class RoomView(CreateView):
+class ContactView(CreateView):
     model = Contact
     template_name = "hotel/contact.html"
     
