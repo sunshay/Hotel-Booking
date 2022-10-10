@@ -80,29 +80,14 @@ class ContactView(CreateView):
     model = Contact
     template_name = "hotel/contact.html"
     
-    def post(self, request, *args, **kwargs):
-        form = ContactForm(request.POST)
-        self.object = self.get_object()
-        context = super().get_context_data(**kwargs)
+    success_msg = 'Contact created.'
+    form_class = ContactForm
+    fields = ['email', 'subject', 'message']
 
-        if form.is_valid():
-            name = form.cleaned_data['email']
-            email = form.cleaned_data['subject']
-            content = form.cleaned_data['message']
-
-            comment = Comment.objects.create(
-                name=name, email=email, content=content,
-            )
-            comment.save()
-            
-            
-            form = ContactForm()
-            context['form'] = form
-            return self.render_to_response(context=context)
-
-        return self.render_to_response(context=context)
-    
-    
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user
+        return super(ContactView, self).form_valid(form)
+   
     
     
     
