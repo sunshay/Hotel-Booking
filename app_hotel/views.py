@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, DetailView, View
+from django.views.generic import TemplateView, DetailView, CreateView
 from .models import Contact, Room, Comment
 from .form import CommentForm, ContactForm
 from django.shortcuts import get_object_or_404
@@ -76,7 +76,7 @@ class RoomView(DetailView):
         return self.render_to_response(context=context)
     
 
-class RoomView(View):
+class RoomView(CreateView):
     model = Contact
     template_name = "hotel/contact.html"
     
