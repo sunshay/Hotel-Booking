@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, DetailView
-from .models import Room, Comment
-from .form import CommentForm
+from django.views.generic import TemplateView, DetailView, View
+from .models import Contact, Room, Comment
+from .form import CommentForm, ContactForm
 from django.shortcuts import get_object_or_404
 from django.utils.text import slugify
 from django.urls import reverse_lazy
@@ -74,3 +74,35 @@ class RoomView(DetailView):
             return self.render_to_response(context=context)
 
         return self.render_to_response(context=context)
+    
+
+class RoomView(View):
+    model = Contact
+    template_name = "hotel/contact.html"
+    
+    def post(self, request, *args, **kwargs):
+        form = ContactForm(request.POST)
+        self.object = self.get_object()
+        context = super().get_context_data(**kwargs)
+
+        if form.is_valid():
+            name = form.cleaned_data['email']
+            email = form.cleaned_data['subject']
+            content = form.cleaned_data['message']
+
+            comment = Comment.objects.create(
+                name=name, email=email, content=content,
+            )
+            comment.save()
+            
+            
+            form = ContactForm()
+            context['form'] = form
+            return self.render_to_response(context=context)
+
+        return self.render_to_response(context=context)
+    
+    
+    
+    
+    
