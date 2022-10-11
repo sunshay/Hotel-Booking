@@ -1,3 +1,4 @@
+import email
 from django.shortcuts import render
 from django.views.generic import TemplateView, DetailView,View, CreateView
 from .models import Contact, Room, Comment
@@ -94,21 +95,22 @@ class ContactView(View):
         context['form'] = form
 
         if form.is_valid():
-            email = form.cleaned_data['email']
+            name = form.cleaned_data['name']
             subject = form.cleaned_data['subject']
+            email = form.cleaned_data['email']
             message = form.cleaned_data['message']
 
             contact = Contact.objects.create(
-                email=email, subject=subject, message=message,
+               name=name, subject=subject, email=email, message=message,
             )
             contact.save()
             
            
-            form = CommentForm()
+            form = ContactForm()
             context['form'] = form
-            return self.render_to_response(context=context)
+            #return render(request, "hotel/contact.html", context=context)
 
-        return self.render_to_response(context=context)
+        return render(request, "hotel/contact.html", context=context)
     
 
 

@@ -1,4 +1,5 @@
 import email
+from unicodedata import name
 from django.utils import timezone
 from django.db import models
 from taggit.managers import TaggableManager
@@ -111,6 +112,7 @@ class Blog(Room_Blog_Absact):
 # Model contact 
 
 class Contact(models.Model):
+    name = models.CharField(max_length=50)
     email = models.EmailField()
     subject = models.CharField(max_length=255)
     message = models.TextField()
