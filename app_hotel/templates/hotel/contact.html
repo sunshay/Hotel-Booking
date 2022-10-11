@@ -33,16 +33,17 @@
                     </div>
                 </div>
                 <div class="col-lg-7 offset-lg-1">
-                    <form action="#" class="contact-form">
+                    <form class="contact-form" method="POST">
+                        {% csrf_token %}
                         <div class="row">
                             <div class="col-lg-6">
-                                <input type="text" placeholder="Your Name">
+                                <input type="text" placeholder="Your Name" class="form-control {% if form.name.errors %}is-invalid{% endif %}" id="id_email" name="name" value="{{ form.name.value|default:'' }}">
                             </div>
                             <div class="col-lg-6">
-                                <input type="text" placeholder="Your Email">
+                                <input type="text" placeholder="Your Email" class="form-control {% if form.email.errors %}is-invalid{% endif %}" id="id_email" name="email" value="{{ form.email.value|default:'' }}">
                             </div>
                             <div class="col-lg-12">
-                                <textarea placeholder="Your Message"></textarea>
+                                <textarea placeholder="Your Message" class="form-control {% if form.message.errors %}is-invalid{% endif %}" id="id_message" name="message" value="{{ form.message.value|default:'' }}"></textarea>
                                 <button type="submit">Submit Now</button>
                             </div>
                         </div>

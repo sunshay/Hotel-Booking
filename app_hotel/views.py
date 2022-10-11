@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, DetailView, CreateView
+from django.views.generic import TemplateView, DetailView,View, CreateView
 from .models import Contact, Room, Comment
 from .form import CommentForm, ContactForm
 from django.shortcuts import get_object_or_404
@@ -76,20 +76,20 @@ class RoomView(DetailView):
         return self.render_to_response(context=context)
     
 
-class ContactView(CreateView):
+class ContactView(View):
     model = Contact
-    template_name = "hotel/contact.html"
+    #template_name = "hotel/contact.html"
     success_msg = 'Contact created.'
     
     def get(self, request, *args, **kwargs):
-        context = {'form': ContactForm()}
-        return render(request, context)
+        context = {}
+        context['form']= ContactForm()
+        return render(request, "hotel/contact.html", context)
     
      # create a post for show one and to make a comment
     def post(self, request, *args, **kwargs):
         form =  ContactForm(request.POST)
-        self.object = self.get_object()
-        context = super().get_context_data(**kwargs)
+        context = {}
         
         context['form'] = form
 
