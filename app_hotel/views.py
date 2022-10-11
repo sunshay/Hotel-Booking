@@ -79,15 +79,38 @@ class RoomView(DetailView):
 class ContactView(CreateView):
     model = Contact
     template_name = "hotel/contact.html"
-    
     success_msg = 'Contact created.'
-    form_class = ContactForm
-    fields = ['email', 'subject', 'message']
-
-    def form_valid(self, form):
-        form.instance.created_by = self.request.user
-        return super(ContactView, self).form_valid(form)
-   
     
+    def get(self, request, *args, **kwargs):
+        context = {'form': ContactForm()}
+        return render(request, context)
+    
+     # create a post for show one and to make a comment
+    def post(self, request, *args, **kwargs):
+        form =  ContactForm(request.POST)
+        self.object = self.get_object()
+        context = super().get_context_data(**kwargs)
+        
+        context['form'] = form
+
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            subject = form.cleaned_data['subject']
+            message = form.cleaned_data['message']
+
+            contact = Contact.objects.create(
+                email=email, subject=subject, message=message,
+            )
+            contact.save()
+            
+           
+            form = CommentForm()
+            context['form'] = form
+            return self.render_to_response(context=context)
+
+        return self.render_to_response(context=context)
+    
+
+
     
     
