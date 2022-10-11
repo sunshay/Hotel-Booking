@@ -36,4 +36,4 @@ admin.site.register(Blog, BlogAdmin)
 
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
-    list_display = ('subject','email')
+    list_display = ('name','phone','subject','email')
