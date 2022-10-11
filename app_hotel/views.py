@@ -97,11 +97,12 @@ class ContactView(View):
         if form.is_valid():
             name = form.cleaned_data['name']
             subject = form.cleaned_data['subject']
+            phone = form.cleaned_data['phone']
             email = form.cleaned_data['email']
             message = form.cleaned_data['message']
 
             contact = Contact.objects.create(
-               name=name, subject=subject, email=email, message=message,
+               name=name,phone=phone, subject=subject, email=email, message=message,
             )
             contact.save()
             
