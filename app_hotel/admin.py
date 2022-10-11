@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Person, Room,Comment,Booking, Category, Blog
+from .models import Contact, Person, Room,Comment,Booking, Category, Blog
 from django.utils.html import format_html
 
 # change Django administration text Login, The listview page and The HTML title tag 
@@ -32,3 +32,8 @@ class BlogAdmin(admin.ModelAdmin):
     pass
 admin.site.register(Category, BlogAdmin)
 admin.site.register(Blog, BlogAdmin)
+
+
+@admin.register(Contact)
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ('subject','email')
