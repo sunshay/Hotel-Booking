@@ -1,5 +1,7 @@
 from django import forms
 from .models import Comment, Contact
+from phonenumber_field.widgets import PhoneNumberPrefixWidget
+from phonenumber_field.formfields import PhoneNumberField
 
 class CommentForm(forms.ModelForm):
     class Meta:
@@ -8,6 +10,11 @@ class CommentForm(forms.ModelForm):
         
 
 class ContactForm(forms.ModelForm):
+    #number = PhoneNumberField(region="CA")
     class Meta:
         model = Contact
-        fields = '__all__'
+        fields = ('name','phone', 'email', 'subject','message')
+        
+        # widgets = {
+        #     'phone': PhoneNumberPrefixWidget(),
+        # }

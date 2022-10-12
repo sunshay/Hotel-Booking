@@ -46,7 +46,7 @@
                                 <input type="text" placeholder="Your subject" class="form-control {% if form.subject.errors %}is-invalid{% endif %}" id="id_subject" name="subject" value="{{ form.subject.value|default:'' }}">
                             </div>
                             <div class="col-lg-6">
-                                <input type="text" placeholder="Your phone" class="form-control {% if form.phone.errors %}is-invalid{% endif %}" id="id_phone" name="phone" value="{{ form.phone.value|default:'' }}">
+                                <input type="text" type="tel" placeholder="Exemple (+243)977977427" class="form-control {% if form.phone.errors %}is-invalid{% endif %}" id="id_phone" name="phone" value="{{ form.phone.value|default:'' }}">
                             </div>
                             <div class="col-lg-12">
                                 <textarea placeholder="Your Message" class="form-control {% if form.message.errors %}is-invalid{% endif %}" id="id_message" name="message" value="{{ form.message.value|default:'' }}"></textarea>

@@ -65,8 +65,10 @@ class MyUserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
-    username=models.CharField(max_length=25, unique=True)
-    phone_number=PhoneNumberField(null=False, unique=True) # pip install django-phonenumber-field
+    username = models.CharField(max_length=25, unique=True)
+    phone_number = PhoneNumberField(null=False, unique=True, help_text='Must be in format +(243)9999999999') 
+    # pip install django-phonenumber-field
+    #pip install django-phonenumber-field[phonenumberslite]
     email = models.EmailField(
         verbose_name='email address',
         max_length=255,
@@ -100,6 +102,12 @@ class User(AbstractBaseUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
+    
+    @property
+    def phone_formatted(self):
+        if self.phone_number == '':
+            return ''
+        return self.phone_number.as_international
 
 
 class Room_Blog_Absact(models.Model):
@@ -189,10 +197,16 @@ class Blog(Room_Blog_Absact):
 
 class Contact(models.Model):
     name = models.CharField(max_length=50)
-    phone = models.CharField(max_length=20)
+    phone = PhoneNumberField(null=False, unique=True, help_text='Must be in format +(243)9999999999')
     email = models.EmailField()
     subject = models.CharField(max_length=255)
     message = models.TextField()
 
     def __str__(self):
         return self.email
+    
+    @property
+    def phone_formatted(self):
+        if self.phone_number == '':
+            return ''
+        return self.phone.as_international
