@@ -33,7 +33,12 @@ class BlogAdmin(admin.ModelAdmin):
 admin.site.register(Category, BlogAdmin)
 admin.site.register(Blog, BlogAdmin)
 
-
+# model contact public
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
     list_display = ('name','phone','subject','email')
+
+# model booking room    
+@admin.register(Booking)
+class BookingAdmin(admin.ModelAdmin):
+    list_display = ('check_in','check_out','room','guest','user',)
