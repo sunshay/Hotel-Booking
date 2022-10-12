@@ -2,7 +2,7 @@ import email
 from django.shortcuts import render,redirect
 from django.http import HttpResponse 
 from django.views.generic import TemplateView, DetailView,View, CreateView
-from .models import Contact, Room, Comment,Reservation, User
+from .models import Blog, Contact, Room, Comment,Reservation, User
 from .form import CommentForm, ContactForm
 from django.shortcuts import get_object_or_404
 from django.utils.text import slugify
@@ -28,7 +28,23 @@ class AboutView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['latest_rooms'] = Room.objects.all()[:5]
+        context['rooms'] = Room.objects.all()[:5]
+        return context
+    
+class RoomAllView(TemplateView):
+    template_name = "hotel/rooms.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['rooms'] = Room.objects.all()
+        return context
+    
+class BlogAllView(TemplateView):
+    template_name = "hotel/blogs.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['blogs'] = Blog.objects.all()
         return context
     
 class BlogView(TemplateView):
