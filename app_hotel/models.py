@@ -1,29 +1,25 @@
-import email
-from unicodedata import name
 from django.utils import timezone
 from django.db import models
 from taggit.managers import TaggableManager
+from django.contrib.auth.models import User
 
 
-# Model Person
-class Person(models.Model):
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    birth_date = models.DateField()
-    phone = models.CharField(max_length=15)
-    email = models.EmailField(unique=True)
-    type_user = models.CharField(max_length=50, default="client")
+# # Model Person
+# class Person(User): 
+#     birth_date = models.DateField()
+#     phone = models.CharField(max_length=15)
+#     type_user = models.CharField(max_length=50, default="client")
     
-    def __str__(self) -> str:
-        return self.first_name
+    # def __str__(self) -> str:
+    #     return self.first_name
 
-    @property
-    def full_name(self):
-        "Returns the person's full name."
-        return '%s %s' % (self.first_name, self.last_name)
+    # @property
+    # def full_name(self):
+    #     "Returns the person's full name."
+    #     return '%s %s' % (self.first_name, self.last_name)
     
-    class Meta:
-        ordering = ["last_name", "first_name","birth_date","phone","email","type_user"]
+    # class Meta:
+    #     ordering = ["last_name", "first_name","birth_date","phone","email","type_user"]
 
 # Model Abstract Room and Blog
 class Room_Blog_Absact(models.Model):
@@ -42,7 +38,7 @@ class Room_Blog_Absact(models.Model):
     updated = models.DateTimeField(auto_now =True)
     status = models.CharField(choices= choice, max_length=50)
     services = TaggableManager() # user tag pip install django-taggit
-    user = models.ForeignKey(Person, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     
     def __str__(self) :
         return self.title
@@ -95,7 +91,7 @@ class Reservation(models.Model):
     check_out = models.DateTimeField(auto_now_add =False)
     guest = models.CharField(choices= choice_guest, max_length=100)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
-    user = models.ForeignKey(Person, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     
 # Model Category    
 class Category(models.Model):

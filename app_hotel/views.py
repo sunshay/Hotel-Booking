@@ -2,7 +2,7 @@ import email
 from django.shortcuts import render,redirect
 from django.http import HttpResponse 
 from django.views.generic import TemplateView, DetailView,View, CreateView
-from .models import Contact, Room, Comment,Reservation,Person
+from .models import Contact, Room, Comment,Reservation
 from .form import CommentForm, ContactForm
 from django.shortcuts import get_object_or_404
 from django.utils.text import slugify

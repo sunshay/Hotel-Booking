@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Contact, Person, Room,Comment,Reservation, Category, Blog
+from .models import Contact, Room,Comment,Reservation, Category, Blog
 from django.utils.html import format_html
 
 # change Django administration text Login, The listview page and The HTML title tag 
@@ -7,10 +7,10 @@ admin.site.site_header = "Hotel Booking"
 admin.site.site_title = "Hotel Booking Admin Penal"
 admin.site.index_title = "Welcome to Hotel Booking"
     
-# Model admin person.
-@admin.register(Person)
-class PersonAdmin(admin.ModelAdmin):
-    list_display = ("last_name", "first_name","birth_date","phone","email","type_user")
+# # Model admin person.
+# @admin.register(Person)
+# class PersonAdmin(admin.ModelAdmin):
+#     list_display = ("last_name", "first_name","birth_date","phone","email","type_user")
 
 
 # Model Admin room and booking
