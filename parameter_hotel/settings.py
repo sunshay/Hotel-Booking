@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'app_hotel.apps.AppHotelConfig',
     # add django tag
     'taggit',
+    #add phone number django
+    "phonenumber_field",
 ]
 
 MIDDLEWARE = [
