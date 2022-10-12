@@ -22,6 +22,15 @@ class HomePageView(TemplateView):
         context['latest_rooms'] = Room.objects.all()[:5]
         return context
     
+class AboutView(TemplateView):
+    
+    template_name = "hotel/about.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['latest_rooms'] = Room.objects.all()[:5]
+        return context
+    
 class BlogView(TemplateView):
     
     template_name = "hotel/index.html"
