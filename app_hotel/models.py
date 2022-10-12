@@ -107,7 +107,7 @@ class Category(models.Model):
 
 # Model Chird Blog for Room_Blog_Absact      
 class Blog(Room_Blog_Absact):
-    room_blog = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
 # Model contact 
 
