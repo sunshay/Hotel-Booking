@@ -131,4 +131,4 @@ class ContactAdmin(admin.ModelAdmin):
 # model Reservation room    
 @admin.register(Reservation)
 class BookingAdmin(admin.ModelAdmin):
-    list_display = ('check_in','check_out','room','guest','user',)
+    list_display = ('check_in','check_out','room','number_guest','user',)

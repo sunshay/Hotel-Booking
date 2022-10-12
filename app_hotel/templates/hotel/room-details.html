@@ -20,6 +20,17 @@
 </div>
 <!-- Breadcrumb Section End -->
 
+{% for message in messages %}
+                <div class="container-fluid p-0">
+                <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="True">&times;</span>
+                    </button>
+                    {{ message }}
+                </div>
+                </div>
+                {% endfor %}
+
 <!-- Room Details Section Begin -->
 <section class="room-details-section spad">
     <div class="container">
@@ -92,17 +103,7 @@
                         </div>
                     </div>
                     {% endfor %}
-                    {% for message in messages %}
-                        <div class="container-fluid p-0">
-                        <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="True">&times;</span>
-                            </button>
-                            {{ message }}
-                        </div>
-                        </div>
-                        {% endfor %}
-
+                    
                 <div class="review-add">
                     <h4>Add Review</h4>
                     <form  class="ra-form" method="POST">
@@ -138,7 +139,8 @@
             <div class="col-lg-4">
                 <div class="room-booking">
                     <h3>Your Reservation</h3>
-                    <form action="#">
+                    <form  method="POST">
+                        {% csrf_token %}
                         <div class="check-date">
                             <label for="date-in">Check In:</label>
                             <input type="text" class="date-input" id="date-in" name="check_in">
@@ -151,17 +153,14 @@
                         </div>
                         <div class="select-option">
                             <label for="guest">Guests:</label>
-                            <select id="guest" name="guest" >
-                                {% for reservation in reservation %}
-                                <option value="{{reservation.guest}}">{{reservation.guest}}</option>
-                                {% endfor %}
-                            </select>
+                            <input class="form-control" type="number" value="" name="number_guest">
+                            
                         </div>
                         <div class="select-option">
                             <label for="room">Room:</label>
                             <input class="form-control" type="text" value="{{post_room.title}}" name="room">   
                         </div>
-
+{% comment %} 
                         <div class="select-option">
                             <label for="room">Name:</label>
                             <input class="form-control" type="text" value="" name="name_user">   
@@ -173,7 +172,7 @@
                         <div class="select-option">
                             <label for="room">Email:</label>
                             <input class="form-control" type="text" value="" name="email_user">   
-                        </div>
+                        </div> {% endcomment %}
 
                         <button type="submit">Check Availability</button>
                     </form>
