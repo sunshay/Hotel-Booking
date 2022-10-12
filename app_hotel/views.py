@@ -43,10 +43,12 @@ class RoomView(DetailView):
         form = CommentForm()
         post_room = get_object_or_404(Room, pk=pk)
         comments = post_room.comment_set.all()
+        reservation = Reservation.objects.all()
 
         context['post_room'] = post_room
         context['comments'] = comments
         context['form'] = form
+        context['reservation'] = reservation
         return context
     # create a post for show one and to make a comment
     def post(self, request, *args, **kwargs):
@@ -54,10 +56,10 @@ class RoomView(DetailView):
         self.object = self.get_object()
         context = super().get_context_data(**kwargs)
 
-        post_room = Room.objects.filter(id=self.kwargs['pk'])[0]
-        comments = post_room.comment_set.all()
+        room_id = Room.objects.filter(id=self.kwargs['pk'])[0]
+        comments = room_id.comment_set.all()
         
-        context['post'] = post_room
+        context['post'] = room_id
         context['comments'] = comments
         context['form'] = form
 
@@ -67,13 +69,24 @@ class RoomView(DetailView):
             content = form.cleaned_data['content']
 
             comment = Comment.objects.create(
-                name=name, email=email, content=content, room_blog=post_room
+                name=name, email=email, content=content, room_blog=room_id
             )
             comment.save()
             messages.success(request,"Your comment Successfull")
-            
-           
             form = CommentForm()
+            
+            # reservation function
+        
+            room = Room.objects.all().get(id=room_id)
+            #for finding the reserved rooms on this time period for excluding from the query set
+            for each_reservation in Reservation.objects.all().filter(room = room_id):
+                if str(each_reservation.check_in) < str(request.POST['check_in']) and str(each_reservation.check_out) < str(request.POST['check_out']):
+                    pass
+                elif str(each_reservation.check_in) > str(request.POST['check_in']) and str(each_reservation.check_out) > str(request.POST['check_out']):
+                    pass
+                else:
+                    messages.warning(request,"Sorry This Room is unavailable for Booking")
+                    return redirect("homepage")
             context['form'] = form
             return self.render_to_response(context=context)
 
@@ -148,15 +161,16 @@ class ContactView(View):
             message = form.cleaned_data['message']
 
             contact = Contact.objects.create(
-               name=name,phone=phone, subject=subject, email=email, message=message,
-            )
+               name=name,phone=phone, subject=subject, email=email, message=message,)
             contact.save()
             messages.success(request,"Your message Successfull")
             
-           
+            
+            
             form = ContactForm()
             context['form'] = form
             #return render(request, "hotel/contact.html", context=context)
+        
 
         return render(request, "hotel/contact.html", context=context)
     

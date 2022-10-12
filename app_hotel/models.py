@@ -177,7 +177,7 @@ class Reservation(models.Model):
               )
     check_in = models.DateTimeField(auto_now_add =False)
     check_out = models.DateTimeField(auto_now_add =False)
-    guest = models.CharField(choices= choice_guest, max_length=100)
+    number_guest = models.IntegerField(max_length=100)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     

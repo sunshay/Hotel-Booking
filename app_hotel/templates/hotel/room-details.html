@@ -29,7 +29,7 @@
                     <img src="{{post_room.image.url}}" alt="">
                     <div class="rd-text">
                         <div class="rd-title">
-                            <h3>Premium King Room</h3>
+                            <h3>{{post_room.title}}</h3>
                             <div class="rdt-right">
                                 <div class="rating">
                                     <i class="icon_star"></i>
@@ -141,26 +141,40 @@
                     <form action="#">
                         <div class="check-date">
                             <label for="date-in">Check In:</label>
-                            <input type="text" class="date-input" id="date-in">
+                            <input type="text" class="date-input" id="date-in" name="check_in">
                             <i class="icon_calendar"></i>
                         </div>
                         <div class="check-date">
                             <label for="date-out">Check Out:</label>
-                            <input type="text" class="date-input" id="date-out">
+                            <input type="text" class="date-input" id="date-out" name="check_out" >
                             <i class="icon_calendar"></i>
                         </div>
                         <div class="select-option">
                             <label for="guest">Guests:</label>
-                            <select id="guest">
-                                <option value="">3 Adults</option>
+                            <select id="guest" name="guest" >
+                                {% for reservation in reservation %}
+                                <option value="{{reservation.guest}}">{{reservation.guest}}</option>
+                                {% endfor %}
                             </select>
                         </div>
                         <div class="select-option">
                             <label for="room">Room:</label>
-                            <select id="room">
-                                <option value="">1 Room</option>
-                            </select>
+                            <input class="form-control" type="text" value="{{post_room.title}}" name="room">   
                         </div>
+
+                        <div class="select-option">
+                            <label for="room">Name:</label>
+                            <input class="form-control" type="text" value="" name="name_user">   
+                        </div>
+                        <div class="select-option">
+                            <label for="room">Phone:</label>
+                            <input class="form-control" type="text" value="" name="phone_number">   
+                        </div>
+                        <div class="select-option">
+                            <label for="room">Email:</label>
+                            <input class="form-control" type="text" value="" name="email_user">   
+                        </div>
+
                         <button type="submit">Check Availability</button>
                     </form>
                 </div>
