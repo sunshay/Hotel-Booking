@@ -80,7 +80,7 @@ class Room(Room_Blog_Absact):
     
 
 # Model Booking
-class Booking(models.Model):
+class Reservation(models.Model):
     choice_guest = (
                     ('one_dult',  '1 Dult'),
                     ('two_dult',  '2 Dult'),

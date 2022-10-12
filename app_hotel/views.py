@@ -1,12 +1,14 @@
 import email
-from django.shortcuts import render
+from django.shortcuts import render,redirect
+from django.http import HttpResponse 
 from django.views.generic import TemplateView, DetailView,View, CreateView
-from .models import Contact, Room, Comment
+from .models import Contact, Room, Comment,Reservation,Person
 from .form import CommentForm, ContactForm
 from django.shortcuts import get_object_or_404
 from django.utils.text import slugify
 from django.urls import reverse_lazy
 from django.contrib import messages
+import datetime
 
 # Create your views here.
 
@@ -75,6 +77,49 @@ class RoomView(DetailView):
             return self.render_to_response(context=context)
 
         return self.render_to_response(context=context)
+    
+class ReservationView(View):
+    
+    def post(self, request, *args, **kwargs):
+    
+        if request.method =="POST":
+
+            room_id = request.POST['room_id']
+            
+            room = Room.objects.all().get(id=room_id)
+            #for finding the reserved rooms on this time period for excluding from the query set
+            for each_reservation in Reservation.objects.all().filter(room = room):
+                if str(each_reservation.check_in) < str(request.POST['check_in']) and str(each_reservation.check_out) < str(request.POST['check_out']):
+                    pass
+                elif str(each_reservation.check_in) > str(request.POST['check_in']) and str(each_reservation.check_out) > str(request.POST['check_out']):
+                    pass
+                else:
+                    messages.warning(request,"Sorry This Room is unavailable for Booking")
+                    return redirect("homepage")
+                
+            current_user = request.user
+            total_person = int( request.POST['person'])
+            booking_id = str(room_id) + str(datetime.datetime.now())
+
+            reservation = Reservation()
+            room_object = Room.objects.all().get(id=room_id)
+            room_object.status = '2'
+            
+            user_object = Person.objects.all().get(username=current_user)
+
+            reservation.guest = user_object
+            reservation.room = room_object
+            person = total_person
+            reservation.check_in = request.POST['check_in']
+            reservation.check_out = request.POST['check_out']
+
+            reservation.save()
+
+            messages.success(request,"Congratulations! Booking Successfull")
+
+            return redirect("homepage")
+        else:
+            return HttpResponse('Access Denied')
     
 
 class ContactView(View):
